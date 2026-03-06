@@ -12,24 +12,24 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        # GET PRIORITY AND CATEGORY DATA
+        
         priorities = list(Priority.objects.all())
         categories = list(Category.objects.all())
 
-        # CHECK IF EMPTY
+        
         if not priorities or not categories:
             self.stdout.write(self.style.ERROR(
                 "Please add Priority and Category records in admin first."
             ))
             return
 
-        # OPTIONAL: Clear old data before generating new
+        
         SubTask.objects.all().delete()
         Note.objects.all().delete()
         Task.objects.all().delete()
         self.stdout.write(self.style.WARNING("Old tasks, subtasks, and notes cleared."))
 
-        # GENERATE TASKS
+        
         for _ in range(20):
 
             task = Task.objects.create(
@@ -43,17 +43,17 @@ class Command(BaseCommand):
                 category=random.choice(categories)
             )
 
-            # CREATE SUBTASKS
+            
             for _ in range(3):
                 SubTask.objects.create(
-                    task=task,  # <-- FIXED to match your model field
+                    task=task,  
                     title=fake.sentence(),
                     status=fake.random_element(
                         elements=["Pending", "In Progress", "Completed"]
                     ),
                 )
 
-            # CREATE NOTE
+            
             Note.objects.create(
                 task=task,
                 content=fake.paragraph()
