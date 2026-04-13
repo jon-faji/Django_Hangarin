@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     
     <style>
         :root {
@@ -32,7 +32,8 @@
                 radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
             font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
-            padding: 20px 0; /* Extra space para sa mobile */
+            padding: 40px 0;
+            overflow-x: hidden;
         }
 
         .auth-card {
@@ -44,6 +45,8 @@
             padding: 2.5rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
+            /* Standard entrance */
+            animation: fadeInRight 0.8s ease-out;
         }
 
         .form-logo h2 {
@@ -67,7 +70,6 @@
             font-size: 0.9rem;
         }
 
-        /* Social Register Button */
         .social-login a {
             display: flex;
             align-items: center;
@@ -80,14 +82,15 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             gap: 10px;
             margin-bottom: 1.5rem;
         }
 
         .social-login a:hover {
             background: #f8fafc;
-            transform: translateY(-1px);
+            border-color: #6366f1;
+            transform: scale(1.02);
         }
 
         .divider {
@@ -111,7 +114,6 @@
             letter-spacing: 1px;
         }
 
-        /* Form Styling */
         .form-group {
             margin-bottom: 1.2rem;
         }
@@ -138,6 +140,7 @@
             outline: none;
             border-color: #6366f1;
             box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            transform: translateX(5px);
         }
 
         .btn-signup {
@@ -150,15 +153,14 @@
             font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
             margin-top: 0.5rem;
         }
 
         .btn-signup:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.01);
             box-shadow: 0 15px 20px -5px rgba(99, 102, 241, 0.4);
-            opacity: 0.95;
         }
 
         .login-link {
@@ -174,8 +176,14 @@
             font-weight: 700;
         }
 
-        /* Error Messages */
+        /* Staggered Animation Delays */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
         .alert-danger {
+            animation: headShake 0.5s;
             background: #fff1f2;
             color: var(--error-red);
             border: none;
@@ -184,43 +192,44 @@
             font-size: 0.85rem;
         }
 
-        small.error-text {
-            color: var(--error-red);
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-            display: block;
-        }
-
         .pw-hint {
             font-size: 0.75rem;
             color: var(--text-muted);
             margin-top: 0.25rem;
         }
+
+        .error-text {
+            color: var(--error-red);
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            display: block;
+            animation: fadeIn 0.3s;
+        }
     </style>
 </head>
 <body>
-    <div class="auth-card">
-        <div class="form-logo text-center">
+    <div class="auth-card animate__animated animate__fadeInRight">
+        <div class="form-logo text-center animate__animated animate__fadeInUp delay-1">
             <h2>Hangarin</h2>
         </div>
 
-        <div class="text-center mb-4">
+        <div class="text-center mb-4 animate__animated animate__fadeInUp delay-1">
             <h3>Create Account</h3>
             <p class="subtitle">Join us and start organizing your tasks</p>
         </div>
 
-        <div class="social-login">
+        <div class="social-login animate__animated animate__fadeInUp delay-2">
             <a href="{% provider_login_url 'google' %}">
                 <img src="{% static 'img/google-logo.png' %}" width="18" alt="Google">
                 Sign up with Google
             </a>
         </div>
 
-        <div class="divider">
+        <div class="divider animate__animated animate__fadeInUp delay-2">
             <span>or use your email</span>
         </div>
 
-        <form method="post" action="{% url 'account_signup' %}">
+        <form method="post" action="{% url 'account_signup' %}" class="animate__animated animate__fadeInUp delay-3">
             {% csrf_token %}
 
             {% if form.non_field_errors %}
@@ -269,11 +278,11 @@
             {% endif %}
 
             <button type="submit" class="btn-signup">
-                Get Started <i class="fas fa-rocket ms-2"></i>
+                Get Started <i class="fas fa-rocket ms-2 animate__animated animate__bounce animate__infinite animate__slow"></i>
             </button>
         </form>
 
-        <div class="login-link">
+        <div class="login-link animate__animated animate__fadeInUp delay-4">
             Already have an account? <a href="{% url 'account_login' %}">Sign in</a>
         </div>
     </div>

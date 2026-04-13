@@ -7,8 +7,12 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-8r62nfl_z*-p2n=d*#o+&9p!%w99c+2vaq9^(v=0dpvgc8432!'
+
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 ALLOWED_HOSTS = []
 
 # ========================
@@ -114,7 +118,7 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ========================
-# DJANGO-ALLAUTH SETTINGS (FIXED)
+# DJANGO-ALLAUTH SETTINGS
 # ========================
 SITE_ID = 1
 
@@ -124,7 +128,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = 'task_list'
+LOGIN_REDIRECT_URL = 'home' # I-update ito kung saan mo gusto pumunta after login
 LOGOUT_REDIRECT_URL = 'account_login'
 
 ACCOUNT_LOGOUT_ON_GET = True
@@ -160,3 +164,8 @@ PWA_APP_ICONS_APPLE = [
 ]
 
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static', 'js', 'serviceworker.js')
+
+SESSION_COOKIE_AGE = 1300
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_COOKIE_HTTPONLY = True
