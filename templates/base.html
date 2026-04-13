@@ -1,263 +1,296 @@
 {% load static %}
+{% load pwa %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>{% block title %}Hangarin Dashboard{% endblock %}</title>
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-	
-	<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-	
-	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="{% static 'css/ready.css' %}">
-	<link rel="stylesheet" href="{% static 'css/demo.css' %}">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    
+    {% progressive_web_app_meta %}
 
-	<style>
-		/* Hangarin Professional Overrides */
-		:root {
-			--primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-			--sidebar-bg: #ffffff;
-			--body-bg: #f8fafc;
-		}
+    <link rel="icon" type="image/png" href="{% static 'img/icon-192.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/icon-192.png' %}">
 
-		body {
-			font-family: 'Plus Jakarta Sans', sans-serif !important;
-			background-color: var(--body-bg) !important;
-		}
+    <title>{% block title %}Hangarin Dashboard{% endblock %}</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ready.css' %}">
+    <link rel="stylesheet" href="{% static 'css/demo.css' %}">
 
-		.main-header {
-			background: #fff !important;
-			box-shadow: 0 2px 15px rgba(0,0,0,0.05) !important;
-		}
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --sidebar-bg: #ffffff;
+            --body-bg: #f8fafc;
+        }
 
-		.logo-header {
-			background: var(--primary-gradient) !important;
-			border-bottom: none !important;
-		}
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            background-color: var(--body-bg) !important;
+        }
 
-		.logo-header .logo {
-			color: #fff !important;
-			font-weight: 800 !important;
-			letter-spacing: -0.5px;
-			font-size: 1.4rem !important;
-		}
+        .main-header {
+            background: #fff !important;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05) !important;
+        }
 
-		.sidebar {
-			background: var(--sidebar-bg) !important;
-			box-shadow: 2px 0 15px rgba(0,0,0,0.03) !important;
-			border-right: 1px solid #e2e8f0;
-		}
+        .logo-header {
+            background: var(--primary-gradient) !important;
+            border-bottom: none !important;
+        }
 
-		.sidebar .nav .nav-item a {
-			margin: 5px 15px;
-			border-radius: 10px;
-			transition: all 0.2s ease;
-		}
+        .logo-header .logo {
+            color: #fff !important;
+            font-weight: 800 !important;
+            letter-spacing: -0.5px;
+            font-size: 1.4rem !important;
+        }
 
-		.sidebar .nav .nav-item a:hover, .sidebar .nav .nav-item.active a {
-			background: #f1f5f9 !important;
-			color: #6366f1 !important;
-		}
+        .sidebar {
+            background: var(--sidebar-bg) !important;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.03) !important;
+            border-right: 1px solid #e2e8f0;
+        }
 
-		.sidebar .nav .nav-item.active a i {
-			color: #6366f1 !important;
-		}
+        .sidebar .nav .nav-item a {
+            margin: 5px 15px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
 
-		.main-panel {
-			background-color: var(--body-bg) !important;
-		}
+        .sidebar .nav .nav-item a:hover, .sidebar .nav .nav-item.active a {
+            background: #f1f5f9 !important;
+            color: #6366f1 !important;
+        }
 
-		.card {
-			border-radius: 15px !important;
-			border: none !important;
-			box-shadow: 0 4px 20px rgba(0,0,0,0.04) !important;
-			transition: transform 0.2s ease;
-		}
+        .sidebar .nav .nav-item.active a i {
+            color: #6366f1 !important;
+        }
 
-		.card-header {
-			background: transparent !important;
-			border-bottom: 1px solid #f1f5f9 !important;
-			padding: 1.5rem !important;
-		}
+        .main-panel {
+            background-color: var(--body-bg) !important;
+        }
 
-		.page-title {
-			font-weight: 700 !important;
-			color: #1e293b;
-			margin-bottom: 25px !important;
-		}
+        .card {
+            border-radius: 15px !important;
+            border: none !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04) !important;
+            transition: transform 0.2s ease;
+        }
 
-		/* Update Notification Badge */
-		.notification {
-			background: #ef4444 !important;
-			border: 2px solid #fff;
-		}
+        .card-header {
+            background: transparent !important;
+            border-bottom: 1px solid #f1f5f9 !important;
+            padding: 1.5rem !important;
+        }
 
-		.user-box .u-text h4 {
-			font-weight: 700;
-		}
+        .page-title {
+            font-weight: 700 !important;
+            color: #1e293b;
+            margin-bottom: 25px !important;
+        }
 
-		.btn-danger {
-			background: var(--primary-gradient) !important;
-			border: none !important;
-			box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
-		}
-	</style>
-	{% block extra_css %}{% endblock %}
+        .notification {
+            background: #ef4444 !important;
+            border: 2px solid #fff;
+        }
+
+        .user-box .u-text h4 {
+            font-weight: 700;
+        }
+
+        .btn-danger {
+            background: var(--primary-gradient) !important;
+            border: none !important;
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
-	<div class="wrapper">
-		<div class="main-header">
-			<div class="logo-header">
-				<a href="{% url 'home' %}" class="logo">
-					Hangarin
-				</a>
-				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
-			</div>
-			<nav class="navbar navbar-header navbar-expand-lg">
-				<div class="container-fluid">
-					<form class="navbar-left navbar-form nav-search mr-md-3">
-						<div class="input-group">
-							<input type="text" placeholder="Search tasks..." class="form-control" style="border-radius: 10px 0 0 10px;">
-							<div class="input-group-append">
-								<span class="input-group-text" style="border-radius: 0 10px 10px 0;">
-									<i class="la la-search search-icon"></i>
-								</span>
-							</div>
-						</div>
-					</form>
-					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-						<li class="nav-item dropdown hidden-caret">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-								<i class="la la-bell" style="font-size: 1.5rem; color: #64748b;"></i>
-								<span class="notification">3</span>
-							</a>
-							<ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="navbarDropdown">
-								<li><div class="dropdown-title">Notifications</div></li>
-								<li>
-									<div class="notif-center">
-										<a href="#">
-											<div class="notif-icon notif-primary"> <i class="la la-user-plus"></i> </div>
-											<div class="notif-content">
-												<span class="block">New user registered</span>
-												<span class="time">5 minutes ago</span> 
-											</div>
-										</a>
-									</div>
-								</li>
-								<li><a class="see-all" href="#">See all notifications</a></li>
-							</ul>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> 
-								<img src="{% static 'img/profile.jpg' %}" alt="user-img" width="36" class="img-circle">
-								<span style="font-weight: 600; color: #1e293b;">{{ request.user.username }}</span>
-							</a>
-							<ul class="dropdown-menu dropdown-user animated fadeIn">
-								<li>
-									<div class="user-box">
-										<div class="u-img"><img src="{% static 'img/profile.jpg' %}" alt="user"></div>
-										<div class="u-text">
-											<h4>{{ request.user.username }}</h4>
-											<p class="text-muted">{{ request.user.email }}</p>
-											<a href="{% url 'home' %}" class="btn btn-rounded btn-danger btn-sm">Profile</a>
-										</div>
-									</div>
-								</li>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="{% url 'account_logout' %}"><i class="fa fa-power-off text-danger"></i> Logout</a>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</nav>
-		</div>
+    <div class="wrapper">
+        <div class="main-header">
+            <div class="logo-header">
+                <a href="{% url 'home' %}" class="logo">Hangarin</a>
+                <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
+            </div>
+            <nav class="navbar navbar-header navbar-expand-lg">
+                <div class="container-fluid">
+                    <form class="navbar-left navbar-form nav-search mr-md-3">
+                        <div class="input-group">
+                            <input type="text" placeholder="Search tasks..." class="form-control" style="border-radius: 10px 0 0 10px;">
+                            <div class="input-group-append">
+                                <span class="input-group-text" style="border-radius: 0 10px 10px 0;">
+                                    <i class="la la-search search-icon"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                    <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                        <li class="nav-item dropdown hidden-caret">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                                <i class="la la-bell" style="font-size: 1.5rem; color: #64748b;"></i>
+                                <span class="notification">3</span>
+                            </a>
+                            <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="navbarDropdown">
+                                <li><div class="dropdown-title">Notifications</div></li>
+                                <li>
+                                    <div class="notif-center">
+                                        <a href="#">
+                                            <div class="notif-icon notif-primary"> <i class="la la-user-plus"></i> </div>
+                                            <div class="notif-content">
+                                                <span class="block">New user registered</span>
+                                                <span class="time">5 minutes ago</span> 
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li><a class="see-all" href="#">See all notifications</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> 
+                                <img src="{% static 'img/profile.jpg' %}" alt="user-img" width="36" class="img-circle">
+                                <span style="font-weight: 600; color: #1e293b;">{{ request.user.username }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user animated fadeIn">
+                                <li>
+                                    <div class="user-box">
+                                        <div class="u-img"><img src="{% static 'img/profile.jpg' %}" alt="user"></div>
+                                        <div class="u-text">
+                                            <h4>{{ request.user.username }}</h4>
+                                            <p class="text-muted">{{ request.user.email }}</p>
+                                            <a href="{% url 'home' %}" class="btn btn-rounded btn-danger btn-sm">Profile</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'account_logout' %}"><i class="fa fa-power-off text-danger"></i> Logout</a>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
 
-		<div class="sidebar">
-			<div class="scrollbar-inner sidebar-wrapper">
-				<div class="user">
-					<div class="photo">
-						<img src="{% static 'img/profile.jpg' %}">
-					</div>
-					<div class="info">
-						<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-							<span>
-								{{ request.user.username }}
-								<span class="user-level" style="color: #6366f1; font-weight: 600;">Member</span>
-								<span class="caret"></span>
-							</span>
-						</a>
-						<div class="collapse in" id="collapseExample">
-							<ul class="nav">
-								<li><a href="{% url 'home' %}"><span class="link-collapse">My Profile</span></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<ul class="nav">
-					<li class="nav-item {% if 'task' in request.path %}active{% endif %}">
-						<a href="{% url 'task_list' %}">
-							<i class="la la-tasks"></i>
-							<p>All Tasks</p>
-						</a>
-					</li>
-					<li class="nav-item {% if 'priority' in request.path %}active{% endif %}">
-						<a href="{% url 'priority_list' %}">
-							<i class="la la-flag"></i>
-							<p>Priorities</p>
-						</a>
-					</li>
-					<li class="nav-item {% if 'category' in request.path %}active{% endif %}">
-						<a href="{% url 'category_list' %}">
-							<i class="la la-list"></i>
-							<p>Categories</p>
-						</a>
-					</li>
-					<li class="nav-item {% if 'note' in request.path %}active{% endif %}">
-						<a href="{% url 'note_list' %}">
-							<i class="la la-sticky-note"></i>
-							<p>Notes</p>
-						</a>
-					</li>
-					<li class="nav-item {% if 'subtask' in request.path %}active{% endif %}">
-						<a href="{% url 'subtask_list' %}">
-							<i class="la la-check-square"></i>
-							<p>SubTasks</p>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
+        <div class="sidebar">
+            <div class="scrollbar-inner sidebar-wrapper">
+                <div class="user">
+                    <div class="photo">
+                        <img src="{% static 'img/profile.jpg' %}">
+                    </div>
+                    <div class="info">
+                        <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                            <span>
+                                {{ request.user.username }}
+                                <span class="user-level" style="color: #6366f1; font-weight: 600;">Member</span>
+                                <span class="caret"></span>
+                            </span>
+                        </a>
+                        <div class="collapse in" id="collapseExample">
+                            <ul class="nav">
+                                <li><a href="{% url 'home' %}"><span class="link-collapse">My Profile</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item {% if 'task' in request.path %}active{% endif %}">
+                        <a href="{% url 'task_list' %}">
+                            <i class="la la-tasks"></i>
+                            <p>All Tasks</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {% if 'priority' in request.path %}active{% endif %}">
+                        <a href="{% url 'priority_list' %}">
+                            <i class="la la-flag"></i>
+                            <p>Priorities</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {% if 'category' in request.path %}active{% endif %}">
+                        <a href="{% url 'category_list' %}">
+                            <i class="la la-list"></i>
+                            <p>Categories</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {% if 'note' in request.path %}active{% endif %}">
+                        <a href="{% url 'note_list' %}">
+                            <i class="la la-sticky-note"></i>
+                            <p>Notes</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {% if 'subtask' in request.path %}active{% endif %}">
+                        <a href="{% url 'subtask_list' %}">
+                            <i class="la la-check-square"></i>
+                            <p>SubTasks</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-		<div class="main-panel">
-			<div class="content">
-				<div class="container-fluid">
-					{% block content %}
-					{% endblock %}
-				</div>
-			</div>
-			<footer class="footer">
-				<div class="container-fluid text-center">
-					<div class="copyright">
-						&copy; 2026 Hangarin. Built with <i class="la la-heart text-danger"></i> for productivity.
-					</div>				
-				</div>
-			</footer>
-		</div>
-	</div>
+        <div class="main-panel">
+            <div class="content">
+                <div class="container-fluid">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid text-center">
+                    <div class="copyright">
+                        &copy; 2026 Hangarin. Built with <i class="la la-heart text-danger"></i> for productivity.
+                    </div>              
+                </div>
+            </footer>
+        </div>
+    </div>
 
-	<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog">
-		</div>
+    <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog"></div>
 
-	<script src="{% static 'js/core/jquery.3.2.1.min.js' %}"></script>
-	<script src="{% static 'js/core/popper.min.js' %}"></script>
-	<script src="{% static 'js/core/bootstrap.min.js' %}"></script>
-	<script src="{% static 'js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
-	<script src="{% static 'js/ready.min.js' %}"></script>
-	{% block extra_js %}{% endblock %}
+    <script src="{% static 'js/core/jquery.3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/core/popper.min.js' %}"></script>
+    <script src="{% static 'js/core/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
+    <script src="{% static 'js/ready.min.js' %}"></script>
+    
+    <script>
+        // 1. Automatic Logout Logic (20 Minutes Idle)
+        let idleTime = 0;
+        const maxIdleMinutes = 20;
+        function resetIdleTimer() { idleTime = 0; }
+        setInterval(function() {
+            idleTime++;
+            if (idleTime >= maxIdleMinutes) { window.location.href = "{% url 'account_logout' %}"; }
+        }, 60000);
+        window.onmousemove = resetIdleTimer;
+        window.onkeypress = resetIdleTimer;
+        window.onclick = resetIdleTimer;
+
+        // 2. Security: Clear session on Visibility Change
+        window.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'hidden') { sessionStorage.clear(); }
+        });
+
+        // 3. Robust PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/serviceworker.js', { scope: '/' })
+                .then(function(reg) {
+                    console.log('✅ PWA: Service Worker Registered! Scope:', reg.scope);
+                }).catch(function(err) {
+                    console.error('❌ PWA: Registration Failed!', err);
+                });
+            });
+        }
+    </script>
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-8r62nfl_z*-p2n=d*#o+&9p!%w99c+2vaq9^(v=0dpvgc8432!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.189']
 
 # ========================
 # INSTALLED APPS
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     # Utilities
     'widget_tweaks',
     'tasks',
+    'pwa',
 ]
 
 # ========================
@@ -128,7 +129,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = 'home' # I-update ito kung saan mo gusto pumunta after login
+LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'account_login'
 
 ACCOUNT_LOGOUT_ON_GET = True
@@ -152,18 +153,20 @@ PWA_APP_ORIENTATION = 'portrait'
 PWA_APP_START_URL = '/'
 PWA_APP_STATUS_BAR_COLOR = 'default'
 PWA_APP_DIR = 'ltr'
+PWA_APP_DEBUG_MODE = True
 
 PWA_APP_ICONS = [
-    {'src': '/static/img/icon-192.png', 'sizes': '192x192'},
-    {'src': '/static/img/icon-512.png', 'sizes': '512x512'},
+    {
+        'src': '/static/img/icon-192.png',
+        'sizes': '192x192'
+    },
+    {
+        'src': '/static/img/icon-512.png',
+        'sizes': '512x512'
+    }
 ]
 
-PWA_APP_ICONS_APPLE = [
-    {'src': '/static/img/icon-192.png', 'sizes': '192x192'},
-    {'src': '/static/img/icon-512.png', 'sizes': '512x512'},
-]
-
-PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static', 'js', 'serviceworker.js')
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/js/serviceworker.js')
 
 SESSION_COOKIE_AGE = 1300
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
