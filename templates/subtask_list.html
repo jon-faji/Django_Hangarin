@@ -16,7 +16,7 @@
 			<br/>
 			<div class="col-md-12 row">
 				<div class="col-md-6">
-					<form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'subtask-list' %}" method="get">
+					<form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'subtask_list' %}" method="get">
 						<div class="input-group">
 							<input type="text" placeholder="Search ..." class="form-control" name="q" value="{{ search_query }}"/>
 							<div class="input-group-append">
@@ -29,7 +29,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="pull-right">
-						<a href="{% url 'subtask-add' %}" class="btn btn-success btn-rounded">Add SubTask</a>
+						<a href="{% url 'subtask_create' %}" class="btn btn-success btn-rounded">Add SubTask</a>
 					</div>
 				</div>
 			</div>
@@ -67,8 +67,8 @@
 							<td>{{ object.task }}</td>
 							<td><span class="badge badge-info">{{ object.status }}</span></td>
 							<td>
-								<a href="{% url 'subtask-update' object.id %}">Edit</a>
-								<a href="{% url 'subtask-delete' object.id %}" class="text-danger">Delete</a>
+								<a href="{% url 'subtask_update' object.id %}">Edit</a>
+								<a href="{% url 'subtask_delete' object.id %}" class="text-danger">Delete</a>
 							</td>
 						</tr>
 						{% empty %}

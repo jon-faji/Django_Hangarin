@@ -95,18 +95,3 @@ class Note(BaseModel):
 
     def __str__(self):
         return f"Note for {self.task.title}"
-
-class Organization(models.Model):
-    name = models.CharField(max_length=200)
-    description = models.TextField()
-    college = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = "Organization"
-        verbose_name_plural = "Organizations"
-        ordering = ['-created_at']
-
-    def __str__(self):
-        return self.name

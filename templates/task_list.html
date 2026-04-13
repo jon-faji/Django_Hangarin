@@ -16,7 +16,7 @@
 			<br/>
 			<div class="col-md-12 row">
 				<div class="col-md-6">
-					<form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'task-list' %}" method="get">
+					<form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'task_list' %}" method="get">
 						<div class="input-group">
 							<input type="text" placeholder="Search ..." class="form-control" name="q" value="{{ search_query }}"/>
 							<div class="input-group-append">
@@ -29,7 +29,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="pull-right">
-						<a href="{% url 'task-add' %}" class="btn btn-success btn-rounded">Add Task</a>
+						<a href="{% url 'task_create' %}" class="btn btn-success btn-rounded">Add Task</a>
 					</div>
 				</div>
 			</div>
@@ -72,8 +72,8 @@
 							<td>{{ object.category }}</td>
 							<td>{{ object.deadline|date:"Y-m-d H:i" }}</td>
 							<td>
-								<a href="{% url 'task-update' object.id %}">Edit</a>
-								<a href="{% url 'task-delete' object.id %}" class="text-danger">Delete</a>
+								<a href="{% url 'task_update' object.id %}">Edit</a>
+								<a href="{% url 'task_delete' object.id %}" class="text-danger">Delete</a>
 							</td>
 						</tr>
 						{% empty %}

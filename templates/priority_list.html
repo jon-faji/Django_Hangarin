@@ -16,7 +16,7 @@
 			<br/>
 			<div class="col-md-12 row">
 				<div class="col-md-6">
-					<form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'priority-list' %}" method="get">
+					<form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'priority_list' %}" method="get">
 						<div class="input-group">
 							<input type="text" placeholder="Search ..." class="form-control" name="q" value="{{ search_query }}"/>
 							<div class="input-group-append">
@@ -29,7 +29,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="pull-right">
-						<a href="{% url 'priority-add' %}" class="btn btn-success btn-rounded">Add Priority</a>
+						<a href="{% url 'priority_create' %}" class="btn btn-success btn-rounded">Add Priority</a>
 					</div>
 				</div>
 			</div>
@@ -46,8 +46,8 @@
 						<tr>
 							<td>{{ object.name }}</td>
 							<td>
-								<a href="{% url 'priority-update' object.id %}">Edit</a>
-								<a href="{% url 'priority-delete' object.id %}" class="text-danger">Delete</a>
+								<a href="{% url 'priority_update' object.id %}">Edit</a>
+								<a href="{% url 'priority_delete' object.id %}" class="text-danger">Delete</a>
 							</td>
 						</tr>
 						{% empty %}
