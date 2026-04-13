@@ -1,184 +1,252 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Home - Hangarin{% endblock %}
+{% block title %}Dashboard - Hangarin{% endblock %}
 
-{% block content %}
-<h4 class="page-title">Home</h4>
+{% block extra_css %}
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #5856d6 0%, #8e8cd8 100%);
+    }
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Welcome to Hangarin</div>
-        <div class="card-category">Your Personal Task Management System</div>
-      </div>
-      <div class="card-body">
-        <p>Hello, World</p>
-      </div>
-    </div>
-  </div>
-</div>
+    /* Animation delay para sa staggered effect */
+    .row > [class*="col-"] {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.5s ease forwards;
+    }
 
-<!-- Task Statistics Dashboard -->
-<div class="row">
-  <div class="col-md-3">
-    <div class="card card-stats card-warning">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-5">
-            <div class="icon-big text-center">
-              <i class="la la-tasks"></i>
-            </div>
-          </div>
-          <div class="col-7 d-flex align-items-center">
-            <div class="numbers">
-              <p class="card-category">Total Tasks</p>
-              <h4 class="card-title">{{ total_tasks }}</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="card card-stats card-success">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-5">
-            <div class="icon-big text-center">
-              <i class="la la-check-circle"></i>
-            </div>
-          </div>
-          <div class="col-7 d-flex align-items-center">
-            <div class="numbers">
-              <p class="card-category">Completed</p>
-              <h4 class="card-title">{{ completed_tasks }}</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="card card-stats card-danger">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-5">
-            <div class="icon-big text-center">
-              <i class="la la-spinner"></i>
-            </div>
-          </div>
-          <div class="col-7 d-flex align-items-center">
-            <div class="numbers">
-              <p class="card-category">In Progress</p>
-              <h4 class="card-title">{{ in_progress_tasks }}</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="card card-stats card-primary">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-5">
-            <div class="icon-big text-center">
-              <i class="la la-clock"></i>
-            </div>
-          </div>
-          <div class="col-7 d-flex align-items-center">
-            <div class="numbers">
-              <p class="card-category">Pending</p>
-              <h4 class="card-title">{{ pending_tasks }}</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    .row > [class*="col-"]:nth-child(1) { animation-delay: 0.1s; }
+    .row > [class*="col-"]:nth-child(2) { animation-delay: 0.2s; }
+    .row > [class*="col-"]:nth-child(3) { animation-delay: 0.3s; }
+    .row > [class*="col-"]:nth-child(4) { animation-delay: 0.4s; }
 
-<!-- Additional Statistics -->
-<div class="row" style="margin-top: 20px;">
-  <div class="col-md-3">
-    <div class="card card-stats card-info">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-5">
-            <div class="icon-big text-center">
-              <i class="la la-sticky-note"></i>
-            </div>
-          </div>
-          <div class="col-7 d-flex align-items-center">
-            <div class="numbers">
-              <p class="card-category">Total Notes</p>
-              <h4 class="card-title">{{ total_notes }}</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="card card-stats card-secondary">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-5">
-            <div class="icon-big text-center">
-              <i class="la la-list"></i>
-            </div>
-          </div>
-          <div class="col-7 d-flex align-items-center">
-            <div class="numbers">
-              <p class="card-category">Categories</p>
-              <h4 class="card-title">{{ total_categories }}</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="card card-stats card-purple">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-5">
-            <div class="icon-big text-center">
-              <i class="la la-flag"></i>
-            </div>
-          </div>
-          <div class="col-7 d-flex align-items-center">
-            <div class="numbers">
-              <p class="card-category">Priorities</p>
-              <h4 class="card-title">{{ total_priorities }}</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="card card-stats card-orange">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-5">
-            <div class="icon-big text-center">
-              <i class="la la-tasks"></i>
-            </div>
-          </div>
-          <div class="col-7 d-flex align-items-center">
-            <div class="numbers">
-              <p class="card-category">SubTasks</p>
-              <h4 class="card-title">{{ total_subtasks }}</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .card-stats {
+        border-radius: 16px !important;
+        border: none !important;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-stats:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+
+    .icon-big i {
+        font-size: 2.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    .card-stats:hover .icon-big i {
+        transform: scale(1.2) rotate(-5deg);
+    }
+</style>
 {% endblock %}
 
+{% block content %}
+<div class="page-inner">
+    <div class="page-header mb-4 animate__animated animate__fadeIn">
+        <h4 class="page-title">Dashboard</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="#"><i class="la la-home"></i></a>
+            </li>
+            <li class="separator"><i class="la la-angle-right"></i></li>
+            <li class="nav-item">
+                <a href="#">Overview</a>
+            </li>
+        </ul>
+    </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-round shadow-lg" style="background: var(--primary-gradient); color: white; border: none; overflow: hidden; position: relative;">
+                <div class="card-body p-5">
+                    <div class="d-flex align-items-center position-relative" style="z-index: 2;">
+                        <div class="flex-1">
+                            <h1 class="fw-bold mb-1 animate__animated animate__fadeInLeft">Mabuhay, {{ request.user.username }}!</h1>
+                            <p class="op-8 animate__animated animate__fadeInLeft animate__delay-1s">Welcome back to Hangarin. Here's an overview of your progress today.</p>
+                            <a href="{% url 'task_list' %}" class="btn btn-white btn-border btn-round btn-sm mt-3">View Tasks</a>
+                        </div>
+                        <div class="d-none d-md-block animate__animated animate__zoomIn">
+                            <i class="la la-rocket" style="font-size: 8rem; opacity: 0.2; transform: rotate(15deg);"></i>
+                        </div>
+                    </div>
+                </div>
+                <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-sm-6 col-md-3">
+            <div class="card card-stats card-warning card-round text-white">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="la la-tasks"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Total Tasks</p>
+                                <h4 class="card-title fw-bold">{{ total_tasks }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="card card-stats card-success card-round text-white">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="la la-check-circle"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Completed</p>
+                                <h4 class="card-title fw-bold">{{ completed_tasks }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="card card-stats card-danger card-round text-white">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="la la-spinner"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">In Progress</p>
+                                <h4 class="card-title fw-bold">{{ in_progress_tasks }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="card card-stats card-primary card-round text-white">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="la la-clock-o"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Pending</p>
+                                <h4 class="card-title fw-bold">{{ pending_tasks }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-sm-6 col-md-3">
+            <div class="card card-stats card-round shadow-sm">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="la la-sticky-note text-info"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category text-muted">Total Notes</p>
+                                <h4 class="card-title fw-bold text-dark">{{ total_notes }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="card card-stats card-round shadow-sm">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="la la-list text-secondary"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category text-muted">Categories</p>
+                                <h4 class="card-title fw-bold text-dark">{{ total_categories }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="card card-stats card-round shadow-sm">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="la la-flag" style="color: #a855f7;"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category text-muted">Priorities</p>
+                                <h4 class="card-title fw-bold text-dark">{{ total_priorities }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="card card-stats card-round shadow-sm">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="la la-code-fork text-orange"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category text-muted">SubTasks</p>
+                                <h4 class="card-title fw-bold text-dark">{{ total_subtasks }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
