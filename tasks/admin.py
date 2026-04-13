@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Task, SubTask, Category, Priority, Note
+from .models import Task, SubTask, Category, Priority, Note, Organization
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
@@ -35,3 +35,10 @@ class NoteAdmin(admin.ModelAdmin):
     list_display = ("task", "content", "created_at")
     list_filter = ("created_at",)
     search_fields = ("content",)
+
+@admin.register(Organization)
+class OrganizationAdmin(admin.ModelAdmin):
+
+    list_display = ("name", "college", "created_at")
+    list_filter = ("created_at",)
+    search_fields = ("name", "college", "description")
