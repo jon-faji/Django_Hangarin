@@ -8,9 +8,9 @@ def root_redirect(request):
     return redirect('account_login')
 
 urlpatterns = [
+    path('', root_redirect, name='home'),  
     path('admin/', admin.site.urls),
-    path('', include('pwa.urls')),
-    path('accounts/', include('allauth.urls')),
-    path('tasks/', include('tasks.urls')),
-    path('', root_redirect, name='home'),
+    path('account/', include('allauth.urls')),  
+    path('tasks/', include('tasks.urls')), 
+    path('', include('pwa.urls')),  
 ]

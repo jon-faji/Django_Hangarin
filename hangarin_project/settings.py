@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-8r62nfl_z*-p2n=d*#o+&9p!%w99c+2vaq9^(v=0dpvgc8432!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.189']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # ========================
 # INSTALLED APPS
@@ -121,14 +121,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ========================
 # DJANGO-ALLAUTH SETTINGS
 # ========================
-SITE_ID = 1
+SITE_ID = 2
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-LOGIN_URL = '/accounts/login/'
+LOGIN_URL = '/account/login/'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'account_login'
 
